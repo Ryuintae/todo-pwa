@@ -3,6 +3,8 @@ import './index.css'
 import {useState} from "react";
 
 interface Todo {
+    id: string
+    completed: boolean
     text: string
 }
 
@@ -24,7 +26,16 @@ function App() {
                 <button className={"px-y py-2 bg-blue-600 rounded"}
                         onClick={() => {
                             if (task.trim() === "") return;
-                            setTodos(prev => [...prev, {text: task}]);
+
+                            setTodos(prev => [
+                                ...prev,
+                                {
+                                    id: Date.now().toString(),
+                                    text: task,
+                                    completed: false
+                                }
+                            ]);
+
                             setTask("");
                         }}
                 >
@@ -32,10 +43,10 @@ function App() {
                 </button>
 
                 <div className={"mt-4 w-64 flex flex-col gap-2"}>
-                    {todos.map((todo, index) =>
+                    {todos.map(todo =>
                         <div
-                            key={index}
-                            className={"bg-neutral-400 px-3 py-2 rounded"}
+                            key={todo.id}
+                            className="bg-neutral-400 px-3 py-2 rounded"
                         >
                             {todo.text}
                         </div>
