@@ -11,6 +11,23 @@ interface Todo {
 function App() {
     const [task, setTask] = useState<string>("")
     const [todos, setTodos] = useState<Todo[]>([])
+    const addTodos = () => {
+        if (task.trim() === "") return;
+
+        setTodos(prev => [
+            ...prev,
+            {
+                id: Date.now().toString(),
+                text: task,
+                completed: false
+            }
+        ]);
+
+        setTask("");
+    }
+    const completeTodos = (id: string) =>{
+        setTodos(prev => prev.filter(todo => todo.id !== id));
+    }
     return (
         <>
             <div className="min-h-screen flex items-center justify-center bg-neutral-600">
@@ -25,18 +42,7 @@ function App() {
 
                 <button className={"px-y py-2 bg-blue-600 rounded"}
                         onClick={() => {
-                            if (task.trim() === "") return;
-
-                            setTodos(prev => [
-                                ...prev,
-                                {
-                                    id: Date.now().toString(),
-                                    text: task,
-                                    completed: false
-                                }
-                            ]);
-
-                            setTask("");
+                            addTodos()
                         }}
                 >
                     할 일 추가
@@ -49,6 +55,9 @@ function App() {
                             className="bg-neutral-400 px-3 py-2 rounded"
                         >
                             {todo.text}
+                        <button onClick={()=>{
+                            completeTodos(todo.id)
+                        }}> 할일 완성 </button>
                         </div>
                     )}
 
