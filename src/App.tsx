@@ -26,7 +26,8 @@ function App() {
         setTask("");
     }
     const completeTodos = (id: string) =>{
-        setTodos(prev => prev.filter(todo => todo.id !== id));
+        setTodos(prev =>
+            prev.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo))
     }
     return (
         <>
@@ -64,19 +65,21 @@ function App() {
                         {todos.map(todo => (
                             <div
                                 key={todo.id}
-                                className="flex justify-between items-center bg-gray-100 px-4 py-3 rounded-lg shadow-sm hover:shadow-md transition"
+                                className={"flex justify-between items-center bg-gray-100 px-4 py-3 rounded-lg shadow-sm hover:shadow-md transition"
+                                + (todo.completed ? "bg-gray-50" : "bg-gray-100" )}
                             >
-              <span className="text-gray-800">
+              <span className={todo.completed ? "text-gray-400 line-through": "text-gray-800"}>
                 {todo.text}
               </span>
 
                                 <button
-                                    className="text-sm px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 active:scale-95 transition"
-                                    onClick={() => {
-                                        completeTodos(todo.id)
-                                    }}
+                                    className={
+                                        "text-sm px-3 py-1 text-white rounded-md active:scale-95 transition " +
+                                        (todo.completed ? "bg-gray-500 hover:bg-gray-600" : "bg-green-500 hover:bg-green-600")
+                                    }
+                                    onClick={() => completeTodos(todo.id)}
                                 >
-                                    완료
+                                    {todo.completed ? "취소" : "완료"}
                                 </button>
                             </div>
                         ))}
