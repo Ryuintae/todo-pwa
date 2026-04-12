@@ -1,6 +1,6 @@
 import './App.css'
 import './index.css'
-import {useState} from "react";
+import { useState } from "react";
 
 interface Todo {
     id: string
@@ -25,39 +25,60 @@ function App() {
 
         setTask("");
     }
-    const completeTodos = (id: string) =>{
+
+    const completeTodos = (id: string) => {
         setTodos(prev =>
-            prev.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo))
+            prev.map(todo =>
+                todo.id === id
+                    ? { ...todo, completed: !todo.completed }
+                    : todo
+            )
+        )
     }
+
+    const deleteTodo = (id: string) => {
+        setTodos(prev =>
+            prev.filter(todo => todo.id !== id)
+        )
+    }
+
     return (
-        <>
-            <div className="min-h-screen bg-gradient-to-br from-neutral-900 to-neutral-700 flex items-center justify-center px-4">
-
-                <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-6">
-
-                    <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-4 py-10">
+            <div className="mx-auto w-full max-w-2xl">
+                <div className="mb-6">
+                    <p className="text-sm font-medium tracking-[0.2em] text-sky-300 uppercase">
+                        React Study
+                    </p>
+                    <h1 className="mt-2 text-4xl font-bold tracking-tight text-white md:text-5xl">
                         Todo List
                     </h1>
+                    <p className="mt-3 text-sm leading-6 text-slate-300 md:text-base">
+                        간단한 할 일 관리를 통해 React 상태 관리와 배열 업데이트를 연습하는 예제입니다.
+                    </p>
+                </div>
 
+                <div className="rounded-[32px] border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur-xl md:p-6">
                     {/* 입력 영역 */}
-                    <div className="flex gap-2">
-                        <input
-                            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                            value={task}
-                            onChange={(event) => {
-                                setTask(event.target.value)
-                            }}
-                            placeholder="할 일을 입력하세요..."
-                        />
+                    <div className="rounded-3xl border border-white/10 bg-slate-950/40 p-3">
+                        <div className="flex gap-3">
+                            <input
+                                className="h-14 flex-1 rounded-2xl border border-white/10 bg-white/10 px-4 text-base text-white placeholder:text-slate-400 outline-none transition focus:border-sky-400/60 focus:ring-2 focus:ring-sky-400/30"
+                                value={task}
+                                onChange={(event) => {
+                                    setTask(event.target.value)
+                                }}
+                                placeholder="할 일을 입력하세요..."
+                            />
 
-                        <button
-                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:scale-95 transition"
-                            onClick={() => {
-                                addTodos()
-                            }}
-                        >
-                            추가
-                        </button>
+                            <button
+                                className="h-14 rounded-2xl bg-sky-500 px-6 font-semibold text-white transition hover:bg-sky-400 active:scale-[0.98]"
+                                onClick={() => {
+                                    addTodos()
+                                }}
+                            >
+                                추가
+                            </button>
+                        </div>
                     </div>
 
                     {/* 리스트 */}
@@ -65,29 +86,63 @@ function App() {
                         {todos.map(todo => (
                             <div
                                 key={todo.id}
-                                className={"flex justify-between items-center bg-gray-100 px-4 py-3 rounded-lg shadow-sm hover:shadow-md transition"
-                                + (todo.completed ? "bg-gray-50" : "bg-gray-100" )}
+                                className={
+                                    "flex items-center justify-between gap-3 rounded-3xl border p-4 transition duration-200 " +
+                                    (todo.completed
+                                        ? "border-emerald-400/20 bg-emerald-400/10"
+                                        : "border-white/10 bg-white/10 hover:bg-white/[0.14]")
+                                }
                             >
-              <span className={todo.completed ? "text-gray-400 line-through": "text-gray-800"}>
-                {todo.text}
-              </span>
+                                <div className="flex min-w-0 items-center gap-3">
+                                    <div
+                                        className={
+                                            "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold transition " +
+                                            (todo.completed
+                                                ? "border-emerald-300 bg-emerald-400 text-slate-900"
+                                                : "border-slate-400/50 bg-transparent text-transparent")
+                                        }
+                                    >
+                                        ✓
+                                    </div>
 
-                                <button
-                                    className={
-                                        "text-sm px-3 py-1 text-white rounded-md active:scale-95 transition " +
-                                        (todo.completed ? "bg-gray-500 hover:bg-gray-600" : "bg-green-500 hover:bg-green-600")
-                                    }
-                                    onClick={() => completeTodos(todo.id)}
-                                >
-                                    {todo.completed ? "취소" : "완료"}
-                                </button>
+                                    <span
+                                        className={
+                                            "truncate text-base font-medium transition " +
+                                            (todo.completed
+                                                ? "text-slate-300 line-through"
+                                                : "text-white")
+                                        }
+                                    >
+                                        {todo.text}
+                                    </span>
+                                </div>
+
+                                <div className="flex shrink-0 items-center gap-2">
+                                    <button
+                                        className={
+                                            "rounded-xl px-4 py-2 text-sm font-medium text-white transition active:scale-[0.98] " +
+                                            (todo.completed
+                                                ? "bg-slate-600 hover:bg-slate-500"
+                                                : "bg-emerald-500 hover:bg-emerald-400")
+                                        }
+                                        onClick={() => completeTodos(todo.id)}
+                                    >
+                                        {todo.completed ? "취소" : "완료"}
+                                    </button>
+
+                                    <button
+                                        className="rounded-xl bg-rose-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-rose-400 active:scale-[0.98]"
+                                        onClick={() => deleteTodo(todo.id)}
+                                    >
+                                        삭제
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>
-
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
