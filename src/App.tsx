@@ -40,6 +40,8 @@ function App() {
         setTodos(prev =>
             prev.filter(todo => todo.id !== id)
         )
+        const completedCount = todos.filter(todo => todo.completed).length
+        const activeCount = todos.filter(todo => !todo.completed).length
     }
 
     return (
