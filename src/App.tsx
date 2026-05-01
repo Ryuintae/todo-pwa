@@ -79,7 +79,7 @@ function App() {
 
                     {/* 입력 영역 */}
                     <div className="rounded-3xl border border-white/10 bg-slate-950/40 p-3">
-                        <div className="flex gap-3">
+                        <div className="flex flex-col gap-3 sm:flex-row">
                             <input
                                 className="h-14 flex-1 rounded-2xl border border-white/10 bg-white/10 px-4 text-base text-white placeholder:text-slate-400 outline-none transition focus:border-sky-400/60 focus:ring-2 focus:ring-sky-400/30"
                                 value={task}
@@ -95,7 +95,7 @@ function App() {
                             />
 
                             <button
-                                className="h-14 rounded-2xl bg-sky-500 px-6 font-semibold text-white transition hover:bg-sky-400 active:scale-[0.98]"
+                                className="h-14 w-full rounded-2xl bg-sky-500 px-6 font-semibold text-white transition hover:bg-sky-400 active:scale-[0.98] sm:w-auto"
                                 onClick={addTodos}
                             >
                                 추가
