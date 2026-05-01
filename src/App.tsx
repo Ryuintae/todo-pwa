@@ -96,9 +96,7 @@ function App() {
 
                             <button
                                 className="h-14 rounded-2xl bg-sky-500 px-6 font-semibold text-white transition hover:bg-sky-400 active:scale-[0.98]"
-                                onClick={() => {
-                                    addTodos()
-                                }}
+                                onClick={addTodos}
                             >
                                 추가
                             </button>
