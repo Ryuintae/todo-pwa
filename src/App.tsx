@@ -104,63 +104,81 @@ function App() {
                     </div>
 
                     {/* 리스트 */}
-                    <div className="mt-6 flex flex-col gap-3">
-                        {todos.map(todo => (
-                            <div
-                                key={todo.id}
-                                className={
-                                    "flex items-center justify-between gap-3 rounded-3xl border p-4 transition duration-200 " +
-                                    (todo.completed
-                                        ? "border-emerald-400/20 bg-emerald-400/10"
-                                        : "border-white/10 bg-white/10 hover:bg-white/[0.14]")
-                                }
-                            >
-                                <div className="flex min-w-0 items-center gap-3">
-                                    <div
-                                        className={
-                                            "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold transition " +
-                                            (todo.completed
-                                                ? "border-emerald-300 bg-emerald-400 text-slate-900"
-                                                : "border-slate-400/50 bg-transparent text-transparent")
-                                        }
-                                    >
-                                        ✓
-                                    </div>
-
-                                    <span
-                                        className={
-                                            "truncate text-base font-medium transition " +
-                                            (todo.completed
-                                                ? "text-slate-300 line-through"
-                                                : "text-white")
-                                        }
-                                    >
-                                        {todo.text}
-                                    </span>
+                    <div className="mt-6">
+                        {todos.length === 0 ? (
+                            <div className="rounded-3xl border border-dashed border-white/10 bg-black/10 px-6 py-14 text-center">
+                                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-2xl">
+                                    ✍️
                                 </div>
 
-                                <div className="flex shrink-0 items-center gap-2">
-                                    <button
-                                        className={
-                                            "rounded-xl px-4 py-2 text-sm font-medium text-white transition active:scale-[0.98] " +
-                                            (todo.completed
-                                                ? "bg-slate-600 hover:bg-slate-500"
-                                                : "bg-emerald-500 hover:bg-emerald-400")
-                                        }
-                                        onClick={() => completeTodos(todo.id)}
-                                    >
-                                        {todo.completed ? "취소" : "완료"}
-                                    </button>
+                                <h2 className="text-lg font-semibold text-white">
+                                    아직 등록된 할 일이 없습니다
+                                </h2>
 
-                                    <button
-                                        className="rounded-xl bg-rose-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-rose-400 active:scale-[0.98]"
-                                        onClick={() => deleteTodo(todo.id)}
-                                    >
-                                        삭제
-                                    </button>
-                                </div>
+                                <p className="mt-2 text-sm leading-6 text-slate-300">
+                                    해야 할 일을 입력하고 첫 번째 투두를 추가해보세요.
+                                </p>
                             </div>
-                        ))}
+                        ) : (
+                            <div className="flex flex-col gap-3">
+                                {todos.map(todo => (
+                                    <div
+                                        key={todo.id}
+                                        className={
+                                            "flex items-center justify-between gap-3 rounded-3xl border p-4 transition duration-200 " +
+                                            (todo.completed
+                                                ? "border-emerald-400/20 bg-emerald-400/10"
+                                                : "border-white/10 bg-white/10 hover:bg-white/[0.14]")
+                                        }
+                                    >
+                                        <div className="flex min-w-0 items-center gap-3">
+                                            <div
+                                                className={
+                                                    "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold transition " +
+                                                    (todo.completed
+                                                        ? "border-emerald-300 bg-emerald-400 text-slate-900"
+                                                        : "border-slate-400/50 bg-transparent text-transparent")
+                                                }
+                                            >
+                                                ✓
+                                            </div>
+
+                                            <span
+                                                className={
+                                                    "truncate text-base font-medium transition " +
+                                                    (todo.completed
+                                                        ? "text-slate-300 line-through"
+                                                        : "text-white")
+                                                }
+                                            >
+                            {todo.text}
+                        </span>
+                                        </div>
+
+                                        <div className="flex shrink-0 items-center gap-2">
+                                            <button
+                                                className={
+                                                    "rounded-xl px-4 py-2 text-sm font-medium text-white transition active:scale-[0.98] " +
+                                                    (todo.completed
+                                                        ? "bg-slate-600 hover:bg-slate-500"
+                                                        : "bg-emerald-500 hover:bg-emerald-400")
+                                                }
+                                                onClick={() => completeTodos(todo.id)}
+                                            >
+                                                {todo.completed ? "취소" : "완료"}
+                                            </button>
+
+                                            <button
+                                                className="rounded-xl bg-rose-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-rose-400 active:scale-[0.98]"
+                                                onClick={() => deleteTodo(todo.id)}
+                                            >
+                                                삭제
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
