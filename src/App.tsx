@@ -40,9 +40,9 @@ function App() {
         setTodos(prev =>
             prev.filter(todo => todo.id !== id)
         )
-        const completedCount = todos.filter(todo => todo.completed).length
-        const activeCount = todos.filter(todo => !todo.completed).length
     }
+    const completedCount = todos.filter(todo => todo.completed).length
+    const activeCount = todos.filter(todo => !todo.completed).length
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-4 py-10">
@@ -60,6 +60,23 @@ function App() {
                 </div>
 
                 <div className="rounded-[32px] border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur-xl md:p-6">
+                    <div className="mb-5 grid grid-cols-3 gap-3">
+                        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                            <p className="text-xs font-medium text-slate-300">전체</p>
+                            <p className="mt-2 text-2xl font-bold text-white">{todos.length}</p>
+                        </div>
+
+                        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                            <p className="text-xs font-medium text-slate-300">진행 중</p>
+                            <p className="mt-2 text-2xl font-bold text-white">{activeCount}</p>
+                        </div>
+
+                        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+                            <p className="text-xs font-medium text-slate-300">완료</p>
+                            <p className="mt-2 text-2xl font-bold text-white">{completedCount}</p>
+                        </div>
+                    </div>
+
                     {/* 입력 영역 */}
                     <div className="rounded-3xl border border-white/10 bg-slate-950/40 p-3">
                         <div className="flex gap-3">
