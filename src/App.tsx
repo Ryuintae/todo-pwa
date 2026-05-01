@@ -86,6 +86,11 @@ function App() {
                                 onChange={(event) => {
                                     setTask(event.target.value)
                                 }}
+                                onKeyDown={(event) => {
+                                    if (event.key === "Enter") {
+                                        addTodos()
+                                    }
+                                }}
                                 placeholder="할 일을 입력하세요..."
                             />
 
