@@ -132,16 +132,18 @@ function App() {
                                         }
                                     >
                                         <div className="flex min-w-0 items-center gap-3">
-                                            <div
+                                            <button
+                                                type="button"
+                                                onClick={() => completeTodos(todo.id)}
                                                 className={
                                                     "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-xs font-bold transition " +
                                                     (todo.completed
                                                         ? "border-emerald-300 bg-emerald-400 text-slate-900"
-                                                        : "border-slate-400/50 bg-transparent text-transparent")
+                                                        : "border-slate-400/50 bg-transparent text-transparent hover:border-sky-300")
                                                 }
                                             >
                                                 ✓
-                                            </div>
+                                            </button>
 
                                             <span
                                                 className={
