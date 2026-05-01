@@ -145,16 +145,22 @@ function App() {
                                                 ✓
                                             </button>
 
-                                            <span
-                                                className={
-                                                    "truncate text-base font-medium transition " +
-                                                    (todo.completed
-                                                        ? "text-slate-300 line-through"
-                                                        : "text-white")
-                                                }
-                                            >
-                            {todo.text}
-                        </span>
+                                            <div className="min-w-0">
+                                                <p
+                                                    className={
+                                                        "truncate text-base font-medium transition " +
+                                                        (todo.completed
+                                                            ? "text-slate-300 line-through"
+                                                            : "text-white")
+                                                    }
+                                                >
+                                                    {todo.text}
+                                                </p>
+
+                                                <p className="mt-1 text-xs text-slate-400">
+                                                    {todo.completed ? "완료된 작업입니다" : "진행 중인 작업입니다"}
+                                                </p>
+                                            </div>
                                         </div>
 
                                         <div className="flex shrink-0 items-center gap-2">
